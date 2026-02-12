@@ -1,4 +1,4 @@
-#include <Windows.h>
+п»ї#include <Windows.h>
 #include"resource.h"
 
 
@@ -21,14 +21,14 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		switch(LOWORD(wParam));
 		{
 		case IDOK:
-			MessageBox(hwnd, "Была нажата кнопка ок", "info", MB_OK | MB_ICONINFORMATION); // первые кавычки это то что  написанно в окна, вторые кавычки это то что написано В ЗаГОЛОВКЕ
+			MessageBox(hwnd, "Р‘С‹Р»Р° РЅР°Р¶Р°С‚Р° РєРЅРѕРїРєР° РѕРє", "info", MB_OK | MB_ICONINFORMATION); // РїРµСЂРІС‹Рµ РєР°РІС‹С‡РєРё СЌС‚Рѕ С‚Рѕ С‡С‚Рѕ  РЅР°РїРёСЃР°РЅРЅРѕ РІ РѕРєРЅР°, РІС‚РѕСЂС‹Рµ РєР°РІС‹С‡РєРё СЌС‚Рѕ С‚Рѕ С‡С‚Рѕ РЅР°РїРёСЃР°РЅРѕ Р’ Р—Р°Р“РћР›РћР’РљР•
 			break;
 		case IDCANCEL: EndDialog(hwnd, 0);
 			break;
 		}
 		break;
 	case WM_CLOSE:
-		EndDialog(hwnd, 0); // закрытие окна с помощью крестика
+		EndDialog(hwnd, 0); // Р·Р°РєСЂС‹С‚РёРµ РѕРєРЅР° СЃ РїРѕРјРѕС‰СЊСЋ РєСЂРµСЃС‚РёРєР°
 	}
 	return FALSE;
 }
