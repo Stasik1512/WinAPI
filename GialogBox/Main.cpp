@@ -20,21 +20,37 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));
 		SendMessage(hwnd, WM_SETICON, 0, (LPARAM)hIcon);
 	}
-
 	break;
-	case WM_COMMAND:
 
-		switch (LOWORD(wParam));
+	case WM_COMMAND:
+	{
+		switch (LOWORD(wParam))
 		{
+		case IDC_BUTTON_COPY:
+		{
+			CONST INT SIZE = 256; //SIZE BIFFER
+			CHAR sz_buffer[SIZE] = {}; // text buffer
+			// ТЕКСТОВЫЕ ПОЛЯ ЧТОБЫ К НИМ МОЖНО БЫЛО ОБРАЩАТСЯ
+			HWND hEditLogin = GetDlgItem(hwnd, IDC_EDIT_LOGIN);
+			HWND hEditPassword = GetDlgItem(hwnd, IDC_EDIT_PASSWORD);
+			// Для того чтобы обратиться к какому-либо элементу окна, ему нужно отправить смс
+			SendMessage(hEditLogin, WM_GETTEXT, SIZE, (LPARAM)sz_buffer); // считываем текст поля логин
+			SendMessage(hEditPassword, WM_SETTEXT, 0, (LPARAM)sz_buffer); // загружаем текст из буфера в пассворд
+		}
+		break;
 		case IDOK:
 			MessageBox(hwnd, "Была нажата кнопка ок", "info", MB_OK | MB_ICONINFORMATION); // первые кавычки это то что  написанно в окна, вторые кавычки это то что написано В ЗаГОЛОВКЕ
 			break;
 		case IDCANCEL: EndDialog(hwnd, 0);
 			break;
 		}
-		break;
+	}
+	break;
 	case WM_CLOSE:
 		EndDialog(hwnd, 0); // закрытие окна с помощью крестика
 	}
 	return FALSE;
 }
+
+
+
