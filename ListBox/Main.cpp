@@ -1,10 +1,12 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <Windows.h>
+#include <cstdio>
 #include"resource.h"
 
 using namespace std;
 
 
-CONST CHAR* ITEMS[] = { "THIS", "is", "my","first", "Combo", "Box" };
+CONST CHAR* VALUES[] = { "THIS", "is", "my","first", "List", "Box" };
 
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -21,14 +23,12 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));
 		SendMessage(hwnd, WM_SETICON, 0, (LPARAM)hIcon);
-
-
-		HWND hCombo = GetDlgItem(hwnd, IDC_COMBO);
-		for (int i = 0; i < sizeof(ITEMS) / sizeof(ITEMS[0]); i++)
+		HWND hListBox = GetDlgItem(hwnd, IDC_LIST);
+		for (int i = 0; i < sizeof(VALUES) / sizeof(VALUES[0]); i++)
 		{
-
-			SendMessage(hCombo, CB_ADDSTRING, 0, (LPARAM)ITEMS[i]);
+			SendMessage(hListBox, LB_ADDSTRING, 0, (LPARAM)VALUES[i]);
 		}
+
 	}
 	break;
 	case WM_COMMAND:
@@ -36,7 +36,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 		case IDOK:
 		{
-			HWND hCombo = GetDlgItem(hwnd, IDC_COMBO);
+			/*HWND hCombo = GetDlgItem(hwnd, IDC_COMBO);
 			INT i = SendMessage(hCombo, CB_GETCURSEL, 0, 0);
 
 			const char* messages[] = {
@@ -48,7 +48,18 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				"You have selected 6 item - This"
 			};
 
-			MessageBox(hwnd, messages[i], "Информация", MB_OK | MB_ICONINFORMATION);
+			MessageBox(hwnd, messages[i], "Информация", MB_OK | MB_ICONINFORMATION);*/
+
+			CONST INT SIZE = 256; 
+			CHAR sz_buffer[SIZE] = {};
+			HWND hListBox = GetDlgItem(hwnd, IDC_LIST);
+
+			INT i = SendMessage(hListBox, LB_GETCURSEL, 0, 0); // LB_ LIST BOX GETCURSEL Get current selection
+			SendMessage(hListBox, LB_GETTEXT, i, (LPARAM)sz_buffer);
+			CHAR sz_message[SIZE] = {};
+			sprintf(sz_message, "You have choose #%i  with value '%s'", i + 1, sz_buffer);
+			if(i != LB_ERR)MessageBox(hwnd, sz_message, "info", MB_OK | MB_ICONINFORMATION);
+			else MessageBox(hwnd, "First, select the item", "info", MB_OK | MB_ICONINFORMATION);
 		}
 		break;
 		case IDCANCEL: EndDialog(hwnd, 0);
