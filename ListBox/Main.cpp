@@ -46,15 +46,15 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				"You have selected 4 item - my",
 				"You have selected 5 item - is",
 				"You have selected 6 item - This"
-			}; 
+			};
 
 			MessageBox(hwnd, messages[i], "Информация", MB_OK | MB_ICONINFORMATION);
 		}
-			break;
+		break;
 		case IDCANCEL: EndDialog(hwnd, 0);
 		}
 		break;
-	case WM_CLOSE: 
+	case WM_CLOSE:
 		EndDialog(hwnd, 0);
 	}
 	return FALSE;

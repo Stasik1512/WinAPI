@@ -5,5 +5,6 @@
   </Configurations>
   <Project Path="ComboBox/ComboBox.vcxproj" Id="a61979f9-9829-4505-9f6f-907c16a22fca" />
   <Project Path="GialogBox/GialogBox.vcxproj" Id="f69506a7-3734-4f18-b68a-59a403e89f6a" />
+  <Project Path="ListBox/ListBox.vcxproj" Id="e4f07078-4847-46f9-94aa-6e6e0fe17439" />
   <Project Path="WinAPI/WinAPI.vcxproj" Id="d09e4715-67cd-42f4-806e-32760efdb31c" />
 </Solution>
