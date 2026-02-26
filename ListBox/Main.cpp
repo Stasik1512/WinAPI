@@ -132,16 +132,17 @@ BOOL CALLBACK AddDialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				{
 					// Получаем текст из поля
 					CONST INT SIZE = 256;
-					CHAR sz_text[SIZE] = {};
+					CHAR sz_buffer[SIZE] = {};
 					HWND hEdit = GetDlgItem(hwnd, IDC_EDIT1);
-					GetWindowText(hEdit, sz_text, SIZE);
+					GetWindowText(hEdit, sz_buffer, SIZE);
 
 					// Проверка, что текст не пустой
-					if (strlen(sz_text) > 0)
+					if (strlen(sz_buffer) > 0) 
 					{
 						// Добавляем текст в ListBox
 						HWND hListBox = GetDlgItem(hParentWnd, IDC_LIST);
-						SendMessage(hListBox, LB_ADDSTRING, 0, (LPARAM)sz_text);
+						if(SendMessage(hListBox, LB_FINDSTRING, 0, (LPARAM)sz_buffer) == LB_ERR)
+						SendMessage(hListBox, LB_ADDSTRING, 0, (LPARAM)sz_buffer);
 					}
 					EndDialog(hwnd, IDOK);
 				}
